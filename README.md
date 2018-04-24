@@ -63,7 +63,7 @@ Here is a list of the APIs:
 
 # Installation
 
-    go get github.com/p4tin/goaws/...
+    go get github.com/qhenkart/goaws/...
 
 ## Build and Run (Standalone)
 

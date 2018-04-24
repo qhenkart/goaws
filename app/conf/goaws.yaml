@@ -43,4 +43,3 @@ Dev:                                # Another environment
         - QueueName: dev-queue4
           Raw: true
     - Name: dev-topic2
-

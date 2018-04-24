@@ -1,0 +1,47 @@
+Local:                              # Environment name that can be passed on the command line
+                                    #     (i.e.: ./goaws [Local | Dev]  -- defaults to 'Local')
+  Host: goaws                   # hostname of the goaws system  (for docker-compose this is the tag name of the container)
+# you can now use either 1 port for both sns and sqs or alternatively you can comment out Port and use SqsPort + SnsPort for compatibilyt with
+# yopa and (fage-sns + face-sqs).  If both ways are in the config file on the one "Port" will be used by GoAws
+  Port: 4150                        # port to listen on.
+  Region: local-01
+  LogMessages: true                 # Log messages (true/false)
+  LogFile: ./goaws_messages.log  # Log filename (for message logging
+  Queues:                           # List of queues to create at startup
+    - Name: audit-wrk                 # Queue name
+    - Name: card-wrk                  # Queue name
+    - Name: dispatcher-wrk            # Queue name
+    - Name: email-wrk                 # Queue name
+    - Name: integration-wrk           # Queue name
+    - Name: media-wrk                 # Queue name
+    - Name: notification-wrk          # Queue name
+    - Name: organization-wrk          # Queue name
+    - Name: project-wrk               # Queue name
+    - Name: session-wrk               # Queue name
+    - Name: user-wrk                  # Queue name
+      ReceiveMessageWaitTimeSeconds: 20 # Queue receive message max wait time
+  Topics:                           # List of topic to create at startup
+    - Name: dispatcher              # Topic name - with some Subscriptions
+      Subscriptions:                # List of Subscriptions to create for this topic (queues will be created as required)
+        - QueueName: audit-wrk                 # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: card-wrk                  # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: dispatcher-wrk            # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: email-wrk                 # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: integration-wrk           # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: media-wrk                 # Queue name
+          Raw: true                           # Raw message delivery (true/false)
+        - QueueName: notification-wrk          # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: organization-wrk          # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: project-wrk               # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: session-wrk               # Queue name
+          Raw: false                           # Raw message delivery (true/false)
+        - QueueName: user-wrk                  # Queue name
+          Raw: false                           # Raw message delivery (true/false)
